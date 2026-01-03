@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import sql from '@/lib/db';
+import db from '@/lib/db';
 
 export async function POST(request) {
   const { id, status } = await request.json();
