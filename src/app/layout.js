@@ -1,13 +1,24 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
-
+import Navbar from '../components/Navbar'; // Import it
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Elite Clean Group',
   description: 'Professional Commercial & Residential Cleaning',
 };
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Navbar />  {/* Add it here at the top */}
+        {children}
+      </body>
+    </html>
+  );
+}
 
 export default function RootLayout({ children }) {
   return (
