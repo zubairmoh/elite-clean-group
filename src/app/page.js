@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image'; // <--- Import the optimized Image component
 import { useCity } from '../hooks/useCity';
 
 export default function Home() {
@@ -9,13 +10,17 @@ export default function Home() {
     <main className="flex min-h-screen flex-col">
       
       {/* HERO SECTION */}
-      <section className="relative bg-gray-900 text-white py-32 px-6">
+      <section className="relative bg-gray-900 text-white py-32 px-6 overflow-hidden">
+        {/* Optimized Background Image */}
         <div className="absolute inset-0 z-0">
-            <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
-                className="w-full h-full object-cover opacity-20"
-                alt="Office Background"
-            />
+          <Image 
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+            alt="Office Background"
+            fill
+            priority // Loads this image first (Crucial for speed score)
+            className="object-cover opacity-20"
+            sizes="100vw"
+          />
         </div>
         
         <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -66,43 +71,49 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-                {/* Airbnb - NEW IMAGE (Clean Bedroom with White Linens) */}
+                {/* Airbnb Card */}
                 <Link href="/airbnb-turnover" className="group block relative h-80 rounded-2xl overflow-hidden hover:ring-4 ring-blue-600 transition">
-                    <img 
+                    <Image 
                         src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80" 
-                        className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110" 
                         alt="Airbnb Bedroom"
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 33vw" // Optimization: Small image on phone, 1/3 width on desktop
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                    <div className="absolute bottom-0 p-8">
+                    <div className="absolute bottom-0 p-8 z-10"> {/* Added z-10 so text sits above gradient */}
                         <h3 className="text-2xl font-bold mb-2">Airbnb Turnover</h3>
                         <p className="text-gray-300 text-sm">Automated scheduling for your short-term rentals.</p>
                     </div>
                 </Link>
 
-                {/* Commercial - STABLE IMAGE */}
+                {/* Commercial Card */}
                 <Link href="/commercial-janitorial" className="group block relative h-80 rounded-2xl overflow-hidden hover:ring-4 ring-blue-600 transition">
-                    <img 
+                    <Image 
                         src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80" 
-                        className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110" 
                         alt="Office Janitorial"
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                    <div className="absolute bottom-0 p-8">
+                    <div className="absolute bottom-0 p-8 z-10">
                         <h3 className="text-2xl font-bold mb-2">Office Janitorial</h3>
                         <p className="text-gray-300 text-sm">Nightly cleaning for professional workspaces.</p>
                     </div>
                 </Link>
 
-                {/* Construction - STABLE IMAGE */}
+                {/* Construction Card */}
                 <Link href="/construction-cleanup" className="group block relative h-80 rounded-2xl overflow-hidden hover:ring-4 ring-blue-600 transition">
-                    <img 
+                    <Image 
                         src="https://images.unsplash.com/photo-1535732759880-bbd5c7265e3f?auto=format&fit=crop&q=80" 
-                        className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110" 
                         alt="Post Construction"
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                    <div className="absolute bottom-0 p-8">
+                    <div className="absolute bottom-0 p-8 z-10">
                         <h3 className="text-2xl font-bold mb-2">Post-Construction</h3>
                         <p className="text-gray-300 text-sm">Heavy debris removal and final detailing.</p>
                     </div>
